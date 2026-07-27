@@ -60,15 +60,15 @@ streamlit run app.py
 
 - Analyzed business domain problems and requirements.
 - Defined core entities and their relationships.
-- Designed junction tables such as store_brands and employee_shifts to resolve many-to-many relationships.
+- Designed junction tables such as `store_brands` and `employee_shifts` to resolve *many-to-many* relationships.
 - Constructed the database ER Diagram.
 
 ### 📌 Phase 2: Database Schema Implementation
 
-- Provisioned tables using CREATE TABLE DDL queries in MySQL (DBeaver).
-- Defined INDEXes on critical columns to optimize data query performance.
-- Built VIEWs to simplify analytical reporting and eliminate query complexity.
-- Wrote TRIGGERs for business logic automation and STORED PROCEDUREs for complex data manipulation.
+- Provisioned tables using `CREATE` TABLE DDL queries in MySQL.
+- Defined `INDEX`es on critical columns to optimize data query performance.
+- Built `VIEW`s to simplify analytical reporting and eliminate query complexity.
+- Wrote `TRIGGER`s for business logic automation and `STORED PROCEDURE`s for complex data manipulation.
 
 ### 📌 Phase 3: Interface & Integration
 
@@ -77,7 +77,7 @@ streamlit run app.py
 
 
 
-# EScreenshots & Diagrams
+# Screenshots & Diagrams
 
 ### 5. Flowcharts
 #### 1-) Hiring an Employee
