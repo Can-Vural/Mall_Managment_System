@@ -1,147 +1,153 @@
-### 📌 İçindekiler
-* [1. Proje Özeti ve Tanımı](#1-proje-özeti-ve-tanımı)
-* [2. Geliştirme Ortamı ve Teknolojiler](#2-geliştirme-ortamı-ve-teknolojiler)
-* [3. Projenin Kurulumu](#3-projenin-kurulumu)
-* [4. Yazılım Mimarisi ](#4-yazılım-mimarisi)
-* [5. Flowchart'lar](#5-flowchartlar)
-* [6. ER Diyagramı](#veritabanı-er-diyagramı)
-* [7. Arayüz](#arayüz)
-* [8. Projenin Genel Yapısı](#8-projenin-genel-yapısı)
-* [9. Referanslar](#9-referanslar)
+### 📌 Table of Contents
+* [1. Project Overview & Description](#1-project-overview--description)
+* [2. Development Environment & Technologies](#2-development-environment--technologies)
+* [3. Project Setup](#3-project-setup)
+* [4. Software Architecture](#4-software-architecture)
+* [5. Flowcharts](#5-flowcharts)
+* [6. ER Diagram](#database-er-diagram)
+* [7. User Interface](#user-interface)
+* [8. Project Structure & Overview](#8-project-structure--overview)
 
+---
 
+## 1. Project Overview & Description
+The Shopping Mall Management Automation is a ***DATABASE-CENTRIC*** management system designed to streamline operational complexity in large-scale shopping malls. This project aims to manage processes such as store leasing, department and employee management, income-expense tracking, and maintenance logs from a single unified hub while ensuring total data integrity.
 
-## 1. Proje Özeti ve Tanımı
-AVM Yönetim Otomasyonu, büyük ölçekli alışveriş merkezlerindeki operasyonel karmaşıklığı çözmek amacıyla geliştirilmiş ***veritabanı odaklı*** bir yönetim sistemidir. Bu proje; mağaza kiralama süreçleri, departman ve personel yönetimi, gelir-gider takibi ve bakım-onarım logları gibi süreçleri tek bir merkezden, tam veri bütünlüğü sağlayarak yönetmeyi hedefler.
+---
 
-## 2. Geliştirme Ortamı ve Teknolojiler
-* **Veritabanı Yönetim Sistemi:** MySQL
-* **Arayüz (Frontend) Dili:** Python 
+## 2. Development Environment & Technologies
+* **Database Management System:** MySQL
+* **Frontend Language:** Python
 * **Web Framework:** Streamlit
-* **Veritabanı Sürücüsü:** `mysql-connector-python`
-* **Veri İşleme:** Pandas
-* **Geliştirme Araçları:** DBeaver, PyCharm, GitHub
+* **Database Driver:** `mysql-connector-python`
+* **Data Processing:** Pandas
+* **Development Tools:** DBeaver, PyCharm, GitHub
 
-## 3. Projenin Kurulumu
-Projeyi (localhost) olarak çalıştırmak için aşağıdaki adımları sırasıyla izleyin:
+---
 
-**📌1. Projeyi Bilgisayarınıza İndirin:**
+## 3. Project Setup
+Follow these steps sequentially to run the project locally (localhost):
 
-**📌2.Gerekli Python Kütüphanelerini Kurun:**
+**📌 1. Clone/Download the Repository:**
+Clone or download the project files to your local computer.
+
+**📌 2. Install Required Python Packages:**
 ```bash
 pip install -r requirements.txt
 ```
-**📌3. Veritabanını Ayağa Kaldırın:**
-MySQL (veya DBeaver) üzerinde boş bir veritabanı oluşturun ve proje dizinindeki database_setup.sql dosyasını çalıştırarak tüm tabloları, trigger, view ve test verilerini içeri aktarın.
+**📌3. Initialize the Database:**
+Create a blank database using MySQL (or DBeaver) and execute the database_setup.sql file located in the project root directory. This will import all tables, triggers, views, and test data.
 
-**📌4. Veritabanı Bağlantı Ayarlarını Yapılandırın:**
-Proje icinde .streamlit adında bir klasör oluşturup içine secrets.toml dosyası ekleyin ve kendi veritabanı bilgilerinizi girin:
+**📌4. Configure Database Credentials:**
+Create a `.streamlit` folder in the project directory, add a secrets.toml file inside it, and fill in your database credentials:
 
 ```Ini, TOML
 [mysql]
 host = "localhost"
 user = "root"
-password = "kendi_mysql_sifreniz"
-database = "db_adi"
+password = "your_mysql_password"
+database = "your_db_name"
 ```
 
-**📌5. Uygulamayı Terminalden Başlatın:**
+**📌5. Launch the Application via Terminal:**
 ```Bash
 streamlit run app.py
 ```
 
-# 4. Yazılım Mimarisi
+# 4. Software Architecture
 
-### 📌 Aşama 1: Gereksinim Analizi ve Modelleme
-* Problemler analiz edildi.
-* Varlıklar ve aralarındaki ilişkiler belirlendi.
-* Çoka çok ilişkileri çözmek adına `store_brands` ve `employee_shifts` gibi ara tablolar tasarlandı.
-* Veritabanının ER Diyagramı çıkarıldı.
+### 📌 Phase 1: Requirements Analysis & Modeling
 
-### 📌 Aşama 2: Veritabanı Şemasının Hazırlanması
-* Tablolar `CREATE TABLE` komutlarıyla MySQL (DBeaver) üzerinde ayağa kaldırıldı.
-* Veri arama performansını optimize etmek için kritik sütunlara `INDEX` tanımlandı.
-* Sorgu karmaşıklığını azaltmak için raporlama amaçlı `VIEW` yapıları oluşturuldu.
-* İş kurallarını otomatikleştirmek için `TRIGGER` ve karmaşık veri manipülasyonları için `STORED PROCEDURE` kodları yazıldı.
+- Analyzed business domain problems and requirements.
+- Defined core entities and their relationships.
+- Designed junction tables such as store_brands and employee_shifts to resolve many-to-many relationships.
+- Constructed the database ER Diagram.
 
-### 📌 Aşama 3: Arayüz ve Entegrasyon
-* `app.py` dosyası oluşturularak **Streamlit** ile arayüz yapıldı.
-* `mysql.connector` kütüphanesi entegre edilerek **Python** ile **MySQL** arasında bağlantı kuruldu.
+### 📌 Phase 2: Database Schema Implementation
+
+- Provisioned tables using CREATE TABLE DDL queries in MySQL (DBeaver).
+- Defined INDEXes on critical columns to optimize data query performance.
+- Built VIEWs to simplify analytical reporting and eliminate query complexity.
+- Wrote TRIGGERs for business logic automation and STORED PROCEDUREs for complex data manipulation.
+
+### 📌 Phase 3: Interface & Integration
+
+- Built the frontend UI using Streamlit in `app.py.`
+- Integrated `mysql-connector-python` to establish seamless connectivity between Python and MySQL.
 
 
 
-# Ekran Görüntüleri ve Diyagramlar
+# EScreenshots & Diagrams
 
-### 5. Flowchart'lar
-#### 1-) Çalışan İşe Alma
+### 5. Flowcharts
+#### 1-) Hiring an Employee
 ```mermaid
 flowchart TD
-    A([Başla]) --> B[Calisan Bilgileri Girilir]
-    B --> C{Butona\nBasıldı mı?}
-    C -- Hayır --> B
-    C -- Evet --> D[sp_hire_new_employee Calisir]
+    A([Start]) --> B[Enter Employee Information]
+    B --> C{Button\nPressed?}
+    C -- No --> B
+    C -- Yes --> D[sp_hire_new_employee Executes]
     D --> E[START TRANSACTION]
-    E --> F{Maaş >= 17000 mi?\n'Trigger'}
-    F -- Hayır --> G[Trigger Hata Fırlatır:\nSIGNAL SQLSTATE '45000']
-    G --> H[ROLLBACK\n'İşlemleri İptal Et']
-    H --> I[Hata Firlat] --> Z([Bitir])
-    F -- Evet --> J[INSERT INTO employees]
+    E --> F{Salary >= 17000?\n'Trigger'}
+    F -- No --> G[Trigger Throws Error:\nSIGNAL SQLSTATE '45000']
+    G --> H[ROLLBACK\n'Abort Transactions']
+    H --> I[Raise Error] --> Z([End])
+    F -- Yes --> J[INSERT INTO employees]
     J --> K[INSERT INTO employee_phones]
     K --> L[INSERT INTO employee_addresses]
-    L --> M{Herhangi bir SQL\nHatası Oluştu mu?}
-    M -- Evet --> H
-    M -- Hayır --> N[COMMIT\n'Verileri Kalıcı Yap']
+    L --> M{Did Any SQL\nError Occur?}
+    M -- Yes --> H
+    M -- No --> N[COMMIT\n'Persist Data']
     N --> O['Hired Successfully!'] --> Z
 ```
-#### 2-) Mağaza Ekleme
+#### 2-) Adding a Store
 ```mermaid
 flowchart TD
-    A([Başla]) --> B[Mağaza Bilgileri Girilir\nve Marka Seçilir]
-    B --> C{Kaydet Butonuna\nBasıldı mı?}
-    C -- Hayır --> B
-    C -- Evet --> D[sp_add_store_with_brand Calisir]
+    A([Start]) --> B[Enter Store Details\nand Select Brand]
+    B --> C{Save Button\nPressed?}
+    C -- No --> B
+    C -- Yes --> D[sp_add_store_with_brand Executes]
     D --> E[START TRANSACTION]
-    E --> F[INSERT INTO stores\n'Mağaza Kaydı Atılır']
-    F --> G[v_new_store_id = LAST_INSERT_ID\n'Yeni Mağaza ID'si Alınır']
-    G --> H[INSERT INTO store_brands\n'Mağaza ve Marka Bağlanır']
-    H --> I{Sistemde Bir\nHata Oluştu mu?}
-    I -- Evet --> J[ROLLBACK\n'Tüm İşlemleri Geri Al']
-    J --> K['Hata Mesajı Göster'] --> Z([Bitir])
-    I -- Hayır --> L[COMMIT]
+    E --> F[INSERT INTO stores\n'Record Store']
+    F --> G[v_new_store_id = LAST_INSERT_ID\n'Fetch New Store ID']
+    G --> H[INSERT INTO store_brands\n'Link Store & Brand']
+    H --> I{Did Any System\nError Occur?}
+    I -- Yes --> J[ROLLBACK\n'Revert All Actions']
+    J --> K['Display Error Message'] --> Z([End])
+    I -- No --> L[COMMIT]
     L --> M['Store added & mapped to brand!'] --> Z
-
 ```
 
-#### 3-) Marka Ekleme
+#### 3-) Adding a Brand
 ```mermaid
 flowchart TD
-    A([Başla]) --> B[Kategori ID ve\nMarka Adi Girilir]
-    B --> C{Kaydet Butonuna\nBasıldı mı?}
-    C -- Hayır --> B
-    C -- Evet --> D[INSERT INTO brands\nSorgusu Çalıştırılır]
-    D --> E{Kategori ID\nVeritabanında Var mı?}
-    E -- Hayır --> F[MySQL: Foreign Key Hatası Fırlatır]
-    F --> G['Veritabanı Hatası Göster'] --> Z([Bitir])
-    E -- Evet --> H[Kayıt Başarıyla Yapilir\nve Veritabanı Güncellenir]
+    A([Start]) --> B[Enter Category ID &\nBrand Name]
+    B --> C{Save Button\nPressed?}
+    C -- No --> B
+    C -- Yes --> D[INSERT INTO brands\nQuery Executes]
+    D --> E{Does Category ID\nExist in Database?}
+    E -- No --> F[MySQL Throws Foreign Key Error]
+    F --> G['Display Database Error'] --> Z([End])
+    E -- Yes --> H[Record Successfully Created\nand Database Updated]
     H --> I['Brand Added!'] --> Z
 
 ```
 
-#### 4-) Departman Ekleme
+#### 4-) Adding a Department
 ```mermaid
 flowchart TD
-    A([Başla]) --> B[Departman Adi Girilir]
-    B --> C{Kaydet Butonuna\nBasıldı mı?}
-    C -- Hayır --> B
-    C -- Evet --> D[INSERT INTO departments\nSorgusu Calisir]
-    D --> E{Departman Adı\nBoş mu?}
-    E -- Evet --> F[Warning:\nLütfen alanları doldurun] --> B
-    E -- No --> G[Veri Tabloya Yazılır\n'Success']
-    G --> H['Department Added!'] --> Z([Bitir])
+    A([Start]) --> B[Enter Department Name]
+    B --> C{Save Button\nPressed?}
+    C -- No --> B
+    C -- Yes --> D[INSERT INTO departments\nQuery Executes]
+    D --> E{Is Department Name\nEmpty?}
+    E -- Yes --> F[Warning:\nPlease fill in all required fields] --> B
+    E -- No --> G[Write Data to Table\n'Success']
+    G --> H['Department Added!'] --> Z([End])
 
 ```
 
-### 📌Veritabanı ER Diyagramı
+### 📌Database ER Diagram
 
 ```mermaid
 erDiagram
@@ -328,7 +334,7 @@ erDiagram
         date revenue_date
     }
 ```
-### 📌Arayüz
+### 📌User-interface
 
 <img width="1853" height="983" alt="1" src="https://github.com/user-attachments/assets/51148b7c-9dea-4230-a676-19e6405510ec" />
 
@@ -341,28 +347,15 @@ erDiagram
 <img width="1850" height="980" alt="5" src="https://github.com/user-attachments/assets/8fc656ed-4c2a-4b14-b403-e5e066f40104" />
 
 
-# 8. Projenin Genel Yapısı
+# 8. Project Structure & Overview
 
-Bu proje; **Normalizasyon kurallarına** göre normalize edilmiş ilişkisel bir **MySQL** veritabanı ile Python tabanlı **Streamlit** framework'ünü entegre eden modern bir **AVM Yönetim Otomasyonudur**. 
+This project is a modern, **database-driven Shopping Mall Management System** that integrates a relational **MySQL** database normalized according to **Database Normalization rules** with a Python-based **Streamlit** framework.
 
-Sistem; veri bütünlüğünü ve güvenliğini arka planda çalışan:
-* **Transaction** uyumlu **Stored Procedure**'ler, 
-* Otomatik veri denetimi yapan **Trigger**'lar,
-* Optimize edilmiş **Index** ve **View** yapıları 
+The system enforces data integrity and security directly at the database level utilizing:
+* **Transaction**-compliant **Stored Procedures**,
+* **Triggers** for automated data auditing,
+* Optimized **Indexes** and analytical **Views**.
 
-ile doğrudan veritabanı seviyesinde korur. 
-
-Sonuç olarak uygulama; departman/marka tanımlamalarından dinamik mağaza kurulumlarına ve personel işe alım süreçlerine kadar tüm operasyonel döngüyü sürdürülebilir bir yazılım mimarisiyle tek bir merkezden yönetir.
-
-# 9. Referanslar
-
-[Python Streamlit Tutorial](https://www.youtube.com/watch?v=o8p7uQCGD0U)
-
-[Python ile MySQL Bağlantısı Örneği](https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html)
-
-[ER Diyagramı (Mermaid) Tutorial](https://www.youtube.com/watch?v=KICPOYw1nck)
-
-
-
+As a result, the application seamlessly handles the entire operational lifecycle—from department and brand management to dynamic store setups and employee recruitment processes—via a sustainable and scalable software architecture.
 
 
