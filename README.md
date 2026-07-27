@@ -1,4 +1,4 @@
-### 📌 Table of Contents
+### 📌 In This Document:
 * [1. Project Overview & Description](#1-project-overview--description)
 * [2. Development Environment & Technologies](#2-development-environment--technologies)
 * [3. Project Setup](#3-project-setup)
